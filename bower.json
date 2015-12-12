@@ -1,0 +1,22 @@
+{
+  "name": "angular-box-drag",
+  "authors": [
+    "https://github.com/mg1075"
+  ],
+  "description": "An angular way to make a draggable box.",
+  "main": "box-drag.js",
+  "moduleType": [],
+  "keywords": [
+    "angular, draggable"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mg1075/angular-box-drag",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
