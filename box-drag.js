@@ -31,6 +31,8 @@
                 x = 0,
                 y = 20;
 
+            element.appendTo('body');
+
             element.css({
                 position: 'fixed',
                 top: attrs.top || undefined,
