@@ -47,7 +47,8 @@
             });
 
             angular.element(element[0].querySelector('div.box-drag-body')).css({
-                height: attrs.bodyHeight || '310px'
+                height: attrs.bodyHeight || '310px',
+                'overflow-y': attrs.bodyOverflowY || 'inherit'
             });
 
             angular.element(element[0].querySelector('div.box-drag-footer')).css({
@@ -60,10 +61,14 @@
                 height_footer = angular.element(element[0].querySelector('div.box-drag-footer')).prop('offsetHeight');
 
             /**
+             * In case there is no footer.
+             */
+            if (height_footer === undefined) { height_footer = 0; }
+
+            /**
              * Compute the wrapper height based off the heights of the header, body, and footer divs.
              */
             element.css({ height: height_header + height_body + height_footer + 'px' });
-
 
 
             var initialMove = true;
