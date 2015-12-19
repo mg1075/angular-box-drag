@@ -102,7 +102,7 @@
             /**
              * Drag the box.
              */
-            angular.element(element[0].querySelector('div.box-drag-handle')).on('mousedown', function(event) {
+            var dragAction = function(event) {
                 event.preventDefault();
 
                 x = jqLiteOffset(element[0]).left;
@@ -113,7 +113,10 @@
 
                 $document.on('mousemove', mousemove);
                 $document.on('mouseup', mouseup);
-            });
+            };
+
+            angular.element(element[0].querySelector('div.box-drag-handle')).on('mousedown', dragAction);
+
 
             function mousemove(event) {
                 element.css({position: 'absolute'});
@@ -140,6 +143,18 @@
                     top: jqLiteOffset(element[0]).innerTop + 'px'
                 });
             }
+
+
+            /**
+             * Remove event-handler and dangling box-drag element from the dom.
+             * https://github.com/johnpapa/angular-styleguide#style-y070
+             * http://stackoverflow.com/questions/26983696/angularjs-does-destroy-remove-event-listeners
+             */
+            scope.$on('$destroy', function () {
+                angular.element(element[0].querySelector('div.box-drag-handle')).off('mousedown', dragAction);
+                element.remove();
+            });
+
         }
     }
 })();
