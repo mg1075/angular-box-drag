@@ -46,9 +46,11 @@
                 padding: attrs.paddingHeader || '7px 10px'
             });
 
+            var bodyOverflowY_prop = attrs.bodyOverflowY || 'inherit';
+
             angular.element(element[0].querySelector('div.box-drag-body')).css({
                 height: attrs.bodyHeight || '310px',
-                'overflow-y': attrs.bodyOverflowY || 'inherit'
+                'overflow-y': bodyOverflowY_prop
             });
 
             angular.element(element[0].querySelector('div.box-drag-footer')).css({
@@ -57,8 +59,15 @@
 
 
             var height_header = angular.element(element[0].querySelector('div.box-drag-header')).prop('offsetHeight'),
+                height_header_lineheight = angular.element(element[0].querySelector('div.box-drag-header')).css('line-height'),
                 height_body = angular.element(element[0].querySelector('div.box-drag-body')).prop('offsetHeight'),
                 height_footer = angular.element(element[0].querySelector('div.box-drag-footer')).prop('offsetHeight');
+
+            /*
+             * TODO: find a better way to deal with header height.
+             * Because 'offsetHeight' fails to get the actual height of the element!
+             */
+            height_header_lineheight = parseFloat(height_header_lineheight.replace('px', ''));
 
             /**
              * In case there is no footer.
@@ -66,9 +75,16 @@
             if (height_footer === undefined) { height_footer = 0; }
 
             /**
+             * In case there is no overflow-y set.
+             */
+            if (bodyOverflowY_prop === 'inherit') {
+                height_header_lineheight = 0;
+            }
+
+            /**
              * Compute the wrapper height based off the heights of the header, body, and footer divs.
              */
-            element.css({ height: height_header + height_body + height_footer + 'px' });
+            element.css({ height: height_header + height_header_lineheight + height_body + height_footer + 'px' });
 
 
             var initialMove = true;
