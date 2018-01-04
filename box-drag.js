@@ -59,7 +59,8 @@
 
 
             var height_header = angular.element(element[0].querySelector('div.box-drag-header')).prop('offsetHeight'),
-                height_header_lineheight = angular.element(element[0].querySelector('div.box-drag-header')).css('line-height'),
+                // DEPRECATED until further review.
+                // height_header_lineheight = angular.element(element[0].querySelector('div.box-drag-header')).css('line-height'),
                 height_body = angular.element(element[0].querySelector('div.box-drag-body')).prop('offsetHeight'),
                 height_footer = angular.element(element[0].querySelector('div.box-drag-footer')).prop('offsetHeight');
 
@@ -67,7 +68,7 @@
              * TODO: find a better way to deal with header height.
              * Because 'offsetHeight' fails to get the actual height of the element!
              */
-            height_header_lineheight = parseFloat(height_header_lineheight.replace('px', ''));
+            // height_header_lineheight = parseFloat(height_header_lineheight.replace('px', ''));
 
             /**
              * In case there is no footer.
@@ -84,7 +85,7 @@
             /**
              * Compute the wrapper height based off the heights of the header, body, and footer divs.
              */
-            element.css({ height: height_header + height_header_lineheight + height_body + height_footer + 'px' });
+            element.css({ height: height_header + /*height_header_lineheight +*/ height_body + height_footer + 'px' });
 
 
             var initialMove = true;
